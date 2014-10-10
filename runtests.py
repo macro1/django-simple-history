@@ -21,6 +21,7 @@ installed_apps = [
     'simple_history',
     'simple_history.tests',
     'simple_history.tests.external',
+    'simple_history.tests.nonrel',
 ]
 
 DEFAULT_SETTINGS = dict(
@@ -31,6 +32,9 @@ DEFAULT_SETTINGS = dict(
     DATABASES={
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
+        },
+        'non_rel': {
+            'ENGINE': 'django_mongodb_engine',
         }
     },
     MIDDLEWARE_CLASSES=[
@@ -38,6 +42,7 @@ DEFAULT_SETTINGS = dict(
         'django.contrib.auth.middleware.AuthenticationMiddleware',
         'django.contrib.messages.middleware.MessageMiddleware',
     ],
+    DATABASE_ROUTERS=['simple_history.tests.routers.NonRelTestRouter']
 )
 
 if django.VERSION >= (1, 5):
